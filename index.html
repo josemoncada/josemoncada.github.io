@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>José Moncada Muñoz - Senior Full Stack Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #141b3a;
+            --bg-card: #1a2347;
+            --text-primary: #e8edf4;
+            --text-secondary: #a0aec0;
+            --accent-primary: #00d9ff;
+            --accent-secondary: #7c3aed;
+            --accent-warm: #f59e0b;
+            --border-color: rgba(0, 217, 255, 0.1);
+            --shadow-glow: rgba(0, 217, 255, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background Effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 217, 255, 0.1) 0%, transparent 50%);
+            animation: backgroundShift 20s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(5%, 5%); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-primary);
+        }
+
+        .lang-switch {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .lang-switch:hover {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 15px var(--shadow-glow);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Section */
+        section {
+            padding: 5rem 0;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-tag {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-primary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: fadeIn 1s ease;
+        }
+
+        .hero h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeIn 1s ease 0.2s backwards;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease 0.4s backwards;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            animation: fadeIn 1s ease 0.6s backwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease 0.8s backwards;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            border: 2px solid var(--accent-primary);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent-primary);
+            box-shadow: 0 0 25px var(--shadow-glow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), transparent);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.05) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px var(--shadow-glow);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            border: 3px solid var(--bg-primary);
+            box-shadow: 0 0 15px var(--shadow-glow);
+        }
+
+        .timeline-company {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.3rem;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-role {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-period {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .timeline-description ul {
+            margin-top: 0.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-description li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            position: relative;
+        }
+
+        .project-tag {
+            display: inline-block;
+            background: rgba(0, 217, 255, 0.1);
+            color: var(--accent-primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .project-company {
+            color: var(--accent-primary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(124, 58, 237, 0.1);
+            color: var(--accent-secondary);
+            padding: 0.3rem 0.7rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(124, 58, 237, 0.2);
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category h3 {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+        }
+
+        .skill-item {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Education & Certifications */
+        .edu-cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .cert-item {
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .cert-item:hover {
+            border-color: var(--accent-primary);
+            transform: translateX(5px);
+        }
+
+        .cert-icon {
+            color: var(--accent-primary);
+            font-size: 1.5rem;
+        }
+
+        .cert-content h4 {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .cert-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .contact-item:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--accent-primary);
+        }
+
+        .contact-info h3 {
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        footer p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(10, 14, 39, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: start;
+                padding: 2rem;
+                transition: left 0.3s ease;
+            }
+
+            nav .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline {
+                padding-left: 1rem;
+            }
+
+            .timeline-item {
+                padding-left: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Hidden class for language switching */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">&lt;JM /&gt;</a>
+            <div class="nav-links" id="navLinks">
+                <a href="#about" data-en="About" data-es="Acerca">About</a>
+                <a href="#experience" data-en="Experience" data-es="Experiencia">Experience</a>
+                <a href="#projects" data-en="Projects" data-es="Proyectos">Projects</a>
+                <a href="#skills" data-en="Skills" data-es="Habilidades">Skills</a>
+                <a href="#contact" data-en="Contact" data-es="Contacto">Contact</a>
+                <button class="lang-switch" onclick="toggleLanguage()">
+                    <span id="langText">ES</span>
+                </button>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-tag" data-en="Hello, I'm" data-es="Hola, soy">Hello, I'm</div>
+                <h1>José Moncada Muñoz</h1>
+                <div class="hero-subtitle" data-en="Senior Full Stack Engineer" data-es="Ingeniero Full Stack Senior">
+                    Senior Full Stack Engineer
+                </div>
+                <p class="hero-description" data-en="14+ years building scalable web and mobile applications. Specialized in backend with Java and Node.js (NestJS), REST APIs, AWS, and leading technical teams." data-es="Más de 14 años construyendo aplicaciones web y móviles escalables. Especializado en backend con Java y Node.js (NestJS), APIs REST, AWS, y liderazgo de equipos técnicos.">
+                    14+ years building scalable web and mobile applications. Specialized in backend with Java and Node.js (NestJS), REST APIs, AWS, and leading technical teams.
+                </p>
+                <div class="btn-group">
+                    <a href="#contact" class="btn btn-primary" data-en="Get in Touch" data-es="Contactar">Get in Touch</a>
+                    <a href="#" class="btn btn-secondary" id="downloadCV" data-en="Download CV" data-es="Descargar CV">Download CV</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title" data-en="About Me" data-es="Acerca de Mí">About Me</h2>
+            <div class="card">
+                <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary);" data-en="Senior Software Engineer with over 14 years of experience developing scalable web and mobile applications. I specialize in backend development with Java and Node.js (NestJS), REST API design, relational database management, and deploying solutions on AWS. With experience as a Technical Lead and Solution Architect, I've contributed to the analysis, design, estimation, and delivery of high-impact projects using agile methodologies, complemented by full-stack expertise in Angular and React." data-es="Ingeniero de Software Senior con más de 14 años de experiencia desarrollando aplicaciones web y móviles escalables. Especializado en desarrollo backend con Java y Node.js (NestJS), diseño de APIs REST, manejo de bases de datos relacionales y despliegue de soluciones en AWS. Con experiencia como Líder Técnico y Arquitecto de Solución, he participado en análisis, diseño, estimación y entrega de proyectos de alto impacto bajo metodologías ágiles, con experiencia full stack en Angular y React.">
+                    Senior Software Engineer with over 14 years of experience developing scalable web and mobile applications. I specialize in backend development with Java and Node.js (NestJS), REST API design, relational database management, and deploying solutions on AWS. With experience as a Technical Lead and Solution Architect, I've contributed to the analysis, design, estimation, and delivery of high-impact projects using agile methodologies, complemented by full-stack expertise in Angular and React.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title" data-en="Professional Experience" data-es="Experiencia Profesional">Professional Experience</h2>
+            <div class="timeline">
+                <!-- Lumston -->
+                <div class="timeline-item">
+                    <h3 class="timeline-company">Lumston</h3>
+                    <div class="timeline-role" data-en="Senior Software Engineer / Solution Architect" data-es="Ingeniero de Software Senior / Arquitecto de Solución">Senior Software Engineer / Solution Architect</div>
+                    <div class="timeline-period" data-en="2021 - Present" data-es="2021 - Actual">2021 - Present</div>
+                    <div class="timeline-description" data-en="<ul><li>Full-stack web development with Angular, React, Java, Node.js, NestJS, and C#</li><li>Design of scalable, secure backend architectures</li><li>Implementation of AWS services (EC2, S3, RDS, CloudFront, Cognito)</li><li>SRE participation to ensure availability and stability</li><li>Technical leadership on critical business modules</li></ul>" data-es="<ul><li>Desarrollo de aplicaciones web full stack con Angular, React, Java, Node.js, NestJS y C#</li><li>Diseño de arquitecturas backend escalables y seguras</li><li>Implementación de servicios en AWS (EC2, S3, RDS, CloudFront, Cognito)</li><li>Participación como SRE asegurando disponibilidad y estabilidad</li><li>Liderazgo técnico en módulos críticos del negocio</li></ul>">
+                        <ul>
+                            <li>Full-stack web development with Angular, React, Java, Node.js, NestJS, and C#</li>
+                            <li>Design of scalable, secure backend architectures</li>
+                            <li>Implementation of AWS services (EC2, S3, RDS, CloudFront, Cognito)</li>
+                            <li>SRE participation to ensure availability and stability</li>
+                            <li>Technical leadership on critical business modules</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- GISnet -->
+                <div class="timeline-item">
+                    <h3 class="timeline-company">GISnet S.C.</h3>
+                    <div class="timeline-role" data-en="Software Engineer" data-es="Ingeniero de Software">Software Engineer</div>
+                    <div class="timeline-period">2020 - 2021</div>
+                    <div class="timeline-description" data-en="<ul><li>Developed web applications as a Full Stack Java Developer</li><li>Designed and generated reports with JasperReports</li><li>Worked on cadastral management systems for government agencies</li></ul>" data-es="<ul><li>Desarrollo de aplicaciones web como Full Stack Java Developer</li><li>Diseño y generación de reportes con JasperReports</li><li>Trabajo en sistemas de gestión catastral para organismos gubernamentales</li></ul>">
+                        <ul>
+                            <li>Developed web applications as a Full Stack Java Developer</li>
+                            <li>Designed and generated reports with JasperReports</li>
+                            <li>Worked on cadastral management systems for government agencies</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Freelance -->
+                <div class="timeline-item">
+                    <h3 class="timeline-company" data-en="Freelance" data-es="Independiente">Freelance</h3>
+                    <div class="timeline-role" data-en="Full Stack Developer" data-es="Desarrollador Full Stack">Full Stack Developer</div>
+                    <div class="timeline-period">2019 - 2020</div>
+                    <div class="timeline-description" data-en="<ul><li>Developed web and mobile applications</li><li>Implemented solutions using Java, C#, and Ionic</li><li>Built reusable libraries and helped with project estimation</li></ul>" data-es="<ul><li>Desarrollo de aplicaciones web y móviles</li><li>Implementación de soluciones en Java, C# e Ionic</li><li>Desarrollo de librerías reutilizables y estimación de proyectos</li></ul>">
+                        <ul>
+                            <li>Developed web and mobile applications</li>
+                            <li>Implemented solutions using Java, C#, and Ionic</li>
+                            <li>Built reusable libraries and helped with project estimation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Novutek -->
+                <div class="timeline-item">
+                    <h3 class="timeline-company">Novutek</h3>
+                    <div class="timeline-role" data-en="Software Engineer" data-es="Ingeniero de Software">Software Engineer</div>
+                    <div class="timeline-period">2011 - 2019</div>
+                    <div class="timeline-description" data-en="<ul><li>Developed Java and C# full-stack web applications</li><li>Analyzed and documented requirements</li><li>Built reusable libraries</li><li>Managed deployments and provided production support</li></ul>" data-es="<ul><li>Desarrollo de aplicaciones web Java y C# Full Stack</li><li>Análisis y documentación de requerimientos</li><li>Desarrollo de librerías reutilizables</li><li>Gestión de despliegues y soporte productivo</li></ul>">
+                        <ul>
+                            <li>Developed Java and C# full-stack web applications</li>
+                            <li>Analyzed and documented requirements</li>
+                            <li>Built reusable libraries</li>
+                            <li>Managed deployments and provided production support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title" data-en="Featured Projects" data-es="Proyectos Destacados">Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- Ilana VA -->
+                <div class="card project-card">
+                    <span class="project-tag" data-en="Fintech" data-es="Fintech">Fintech</span>
+                    <h3 class="project-title" data-en="Ilana VA - Credit Management" data-es="Ilana VA - Gestión de Créditos">Ilana VA - Credit Management</h3>
+                    <div class="project-company" data-en="Client: Finvivir" data-es="Cliente: Finvivir">Client: Finvivir</div>
+                    <p class="project-description" data-en="Mobile app for credit management with KYC customer enrollment (Incode), Mambu core integration, and payment, refinancing, cancellation, and renewal management." data-es="Aplicación móvil para gestión de créditos con enrolamiento de clientes mediante KYC (Incode), integración con core de créditos Mambu, y gestión de pagos, refinanciamientos, cancelaciones y renovaciones.">
+                        Mobile app for credit management with KYC customer enrollment (Incode), Mambu core integration, and payment, refinancing, cancellation, and renewal management.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">Spring Boot</span>
+                        <span class="tech-tag">Android</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">AWS</span>
+                    </div>
+                </div>
+
+                <!-- Merit & Demerit -->
+                <div class="card project-card">
+                    <span class="project-tag" data-en="Enterprise" data-es="Empresarial">Enterprise</span>
+                    <h3 class="project-title" data-en="Merit & Demerit - Employee Evaluation" data-es="Merit & Demerit - Evaluación de Personal">Merit & Demerit - Employee Evaluation</h3>
+                    <div class="project-company" data-en="Client: Viva Aerobus" data-es="Cliente: Viva Aerobus">Client: Viva Aerobus</div>
+                    <p class="project-description" data-en="Web and mobile platform for employee performance evaluation, with admin panel for evaluation management and mobile app for employees." data-es="Plataforma web y móvil para evaluación de desempeño del personal, con panel de administración para gestión de evaluaciones y app móvil para empleados.">
+                        Web and mobile platform for employee performance evaluation, with admin panel for evaluation management and mobile app for employees.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">NestJS</span>
+                        <span class="tech-tag">Angular</span>
+                        <span class="tech-tag">Android</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">AWS</span>
+                    </div>
+                </div>
+
+                <!-- HR Management -->
+                <div class="card project-card">
+                    <span class="project-tag" data-en="HR System" data-es="Sistema RH">HR System</span>
+                    <h3 class="project-title" data-en="HR Management - ICA" data-es="Gestión de Personal - ICA">HR Management - ICA</h3>
+                    <div class="project-company" data-en="Client: ICA" data-es="Cliente: ICA">Client: ICA</div>
+                    <p class="project-description" data-en="Comprehensive HR system with employee enrollment, schedule management, check-in/check-out with facial recognition via mobile app, and payroll calculator." data-es="Sistema integral de RH con enrolamiento de personal, administración de horarios, registro de entrada/salida con reconocimiento facial vía app móvil, y tabulador para cálculo de nómina.">
+                        Comprehensive HR system with employee enrollment, schedule management, check-in/check-out with facial recognition via mobile app, and payroll calculator.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">NestJS</span>
+                        <span class="tech-tag">Angular</span>
+                        <span class="tech-tag">Android</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">C#</span>
+                    </div>
+                </div>
+
+                <!-- Cadastral Management -->
+                <div class="card project-card">
+                    <span class="project-tag" data-en="Government" data-es="Gobierno">Government</span>
+                    <h3 class="project-title" data-en="Cadastral Management System" data-es="Gestión Catastral">Cadastral Management System</h3>
+                    <div class="project-company" data-en="Cadastral Agencies" data-es="Organismos Catastrales">Cadastral Agencies</div>
+                    <p class="project-description" data-en="Web application for internal cadastral process management: registration, subdivision, division, owner transfer, document management, and workflow tracking." data-es="Aplicación web para gestión de procesos catastrales internos: registro, lotificación, división, cambio de propietario, gestión documental y seguimiento por etapas del trámite.">
+                        Web application for internal cadastral process management: registration, subdivision, division, owner transfer, document management, and workflow tracking.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">Spring Boot</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">jQuery</span>
+                    </div>
+                </div>
+
+                <!-- Vatten -->
+                <div class="card project-card">
+                    <span class="project-tag" data-en="Services" data-es="Servicios">Services</span>
+                    <h3 class="project-title" data-en="Vatten - Water Management" data-es="Vatten - Gestión de Aguas">Vatten - Water Management</h3>
+                    <div class="project-company" data-en="Water Agencies (Sonora)" data-es="Organismos de Aguas (Sonora)">Water Agencies (Sonora)</div>
+                    <p class="project-description" data-en="Comprehensive water agency administrative system with online payment portal, mobile app for meter reading (online/offline sync), and receipt printing." data-es="Sistema integral administrativo para organismos de agua con portal de pagos en línea, app móvil para captura de lecturas (sincronización online/offline), e impresión de recibos.">
+                        Comprehensive water agency administrative system with online payment portal, mobile app for meter reading (online/offline sync), and receipt printing.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Angular</span>
+                        <span class="tech-tag">Ionic</span>
+                        <span class="tech-tag">Spring Boot</span>
+                        <span class="tech-tag">SQL Server</span>
+                    </div>
+                </div>
+
+                <!-- S4IoT -->
+                <div class="card project-card">
+                    <span class="project-tag" data-en="IoT" data-es="IoT">IoT</span>
+                    <h3 class="project-title" data-en="S4IoT - Gas Tank Monitoring" data-es="S4IoT - Monitoreo de Tanques">S4IoT - Gas Tank Monitoring</h3>
+                    <div class="project-company" data-en="Client: S4IoT" data-es="Cliente: S4IoT">Client: S4IoT</div>
+                    <p class="project-description" data-en="IoT platform for gas tank monitoring with customer management, device tracking, telemetry data processing, and statistical analytics." data-es="Plataforma IoT para monitoreo de tanques de gas con gestión de clientes gaseros, seguimiento de dispositivos, procesamiento de telemetría y análisis estadístico.">
+                        IoT platform for gas tank monitoring with customer management, device tracking, telemetry data processing, and statistical analytics.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Angular</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">AWS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title" data-en="Technical Skills" data-es="Habilidades Técnicas">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Backend</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Java</span>
+                        <span class="skill-item">Spring Boot</span>
+                        <span class="skill-item">Node.js</span>
+                        <span class="skill-item">NestJS</span>
+                        <span class="skill-item">C#</span>
+                        <span class="skill-item">.NET Core</span>
+                        <span class="skill-item">.NET Framework</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Frontend</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Angular</span>
+                        <span class="skill-item">React</span>
+                        <span class="skill-item">TypeScript</span>
+                        <span class="skill-item">JavaScript</span>
+                        <span class="skill-item">HTML5</span>
+                        <span class="skill-item">CSS3</span>
+                        <span class="skill-item">Ionic</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3 data-en="Databases" data-es="Bases de Datos">Databases</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">PostgreSQL</span>
+                        <span class="skill-item">MySQL</span>
+                        <span class="skill-item">SQL Server</span>
+                        <span class="skill-item">MongoDB</span>
+                        <span class="skill-item">TypeORM</span>
+                        <span class="skill-item">Hibernate</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Cloud & DevOps</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">AWS</span>
+                        <span class="skill-item">EC2</span>
+                        <span class="skill-item">S3</span>
+                        <span class="skill-item">RDS</span>
+                        <span class="skill-item">ECS</span>
+                        <span class="skill-item">CloudFront</span>
+                        <span class="skill-item">Docker</span>
+                        <span class="skill-item">Git</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3 data-en="Security" data-es="Seguridad">Security</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">JWT</span>
+                        <span class="skill-item">OAuth2</span>
+                        <span class="skill-item">Spring Security</span>
+                        <span class="skill-item">AWS Cognito</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3 data-en="Others" data-es="Otros">Others</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">REST APIs</span>
+                        <span class="skill-item">Microservices</span>
+                        <span class="skill-item">JasperReports</span>
+                        <span class="skill-item">Power BI</span>
+                        <span class="skill-item">Scrum</span>
+                        <span class="skill-item">Agile</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Certifications -->
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title" data-en="Education & Certifications" data-es="Educación y Certificaciones">Education & Certifications</h2>
+            
+            <div class="card" style="margin-bottom: 3rem;">
+                <h3 style="color: var(--accent-primary); font-size: 1.3rem; margin-bottom: 0.5rem;" data-en="B.S. in Computer Systems Engineering" data-es="Ingeniería en Sistemas Computacionales">B.S. in Computer Systems Engineering</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 0.3rem;" data-en="Instituto Tecnológico Superior de Cajeme" data-es="Instituto Tecnológico Superior de Cajeme">Instituto Tecnológico Superior de Cajeme</p>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">2005 - 2011</p>
+            </div>
+
+            <h3 style="color: var(--accent-primary); font-size: 1.5rem; margin-bottom: 1.5rem; font-family: 'JetBrains Mono', monospace;" data-en="Certifications" data-es="Certificaciones">Certifications</h3>
+            <div class="edu-cert-grid">
+                <div class="cert-item">
+                    <div class="cert-icon">🏆</div>
+                    <div class="cert-content">
+                        <h4>Oracle Certified Expert</h4>
+                        <p>Java EE 6</p>
+                    </div>
+                </div>
+
+                <div class="cert-item">
+                    <div class="cert-icon">🏆</div>
+                    <div class="cert-content">
+                        <h4>Java SE 6 Programmer</h4>
+                        <p>Certified Professional</p>
+                    </div>
+                </div>
+
+                <div class="cert-item">
+                    <div class="cert-icon">🏆</div>
+                    <div class="cert-content">
+                        <h4>Certified Scrum Developer</h4>
+                        <p>Agile Methodology</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title" data-en="Let's Connect" data-es="Conectemos">Let's Connect</h2>
+            <div class="contact-grid">
+                <a href="mailto:jose.moncada.munoz@gmail.com" class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-info">
+                        <h3>Email</h3>
+                        <p>jose.moncada.munoz@gmail.com</p>
+                    </div>
+                </a>
+
+                <a href="tel:+526441617743" class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-info">
+                        <h3 data-en="Phone" data-es="Teléfono">Phone</h3>
+                        <p>+52 644 161 7743</p>
+                    </div>
+                </a>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-info">
+                        <h3 data-en="Location" data-es="Ubicación">Location</h3>
+                        <p data-en="Mexico | Remote" data-es="México | Remoto">Mexico | Remote</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p data-en="© 2025 José Moncada Muñoz. Built with passion." data-es="© 2025 José Moncada Muñoz. Construido con pasión.">© 2025 José Moncada Muñoz. Built with passion.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Language Toggle
+        let currentLang = 'en';
+        
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'es' : 'en';
+            document.getElementById('langText').textContent = currentLang === 'en' ? 'ES' : 'EN';
+            
+            // Update all elements with data-lang attributes
+            document.querySelectorAll('[data-en]').forEach(element => {
+                const enText = element.getAttribute('data-en');
+                const esText = element.getAttribute('data-es');
+                
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    element.placeholder = currentLang === 'en' ? enText : esText;
+                } else if (element.innerHTML.includes('<')) {
+                    // For elements with HTML content
+                    element.innerHTML = currentLang === 'en' ? enText : esText;
+                } else {
+                    element.textContent = currentLang === 'en' ? enText : esText;
+                }
+            });
+
+            // Update CV download link
+            updateCVDownload();
+        }
+
+        function updateCVDownload() {
+            const cvButton = document.getElementById('downloadCV');
+            if (currentLang === 'es') {
+                cvButton.href = 'José_Moncada_Muñoz_CV.pdf';
+            } else {
+                cvButton.href = 'Jose_Moncada_Munoz_CV_EN.pdf';
+            }
+        }
+
+        // Initialize CV download
+        updateCVDownload();
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                const navLinks = document.getElementById('navLinks');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Add stagger animation to cards
+        document.querySelectorAll('.card, .timeline-item, .project-card').forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+    </script>
+</body>
+</html>
